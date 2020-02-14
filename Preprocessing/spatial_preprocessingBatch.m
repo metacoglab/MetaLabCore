@@ -367,7 +367,7 @@ if normalise
         
 
         disp(['RUNNING normalisation (write) job for subject ' name_subj{s0}])
-        spm_jobman('run','normwriteEPI.mat');
+        v
         clear jobs
         % *********************************************************************
     end
