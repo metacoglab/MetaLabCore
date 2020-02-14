@@ -1,9 +1,6 @@
 % EfficDemoER.m
 % Runs simulation of design matrix, takes regressors as
 % input to efficiency calcs
-%
-% oliver hulme 2007
-% Adapted by Steve Fleming, 2007
 
 clear all
 close all
