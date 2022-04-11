@@ -78,7 +78,7 @@ for n = 1:length(name_subj)
             names{1} = 'R_motion';
             onsets{1} = rightOnsets;
             durations{1} = 12;
-            pmod(1).name{1} = 'RT'
+            pmod(1).name{1} = 'RT';
             pmod(1).param{1} = RT;
             pmod(1).poly{1} = 1;
             % Use this to switch off orthogonalisation of pmods (only relevant if you have more than one per condition):
@@ -103,11 +103,19 @@ for n = 1:length(name_subj)
         % Load files we have just created
         epiDir = [dir_base fs name_subj{n} fs dir_epi fs sess_prfx num2str(scanK)];
         mCorrFile = spm_select('List',epiDir,'^rp.*\.txt$');
+        % Add first derivative to motion regressors
+        M = textread([epiDir,fs,mCorrFile]);
+        R = [M [zeros(1,6); diff(M)]];
+        % Write matrix
+        cd(outputDir);
+        multiFile = sprintf('multireg%d.mat',k);
+        save(multiFile, 'R');
+        
         conditionFile = sprintf('conditions%d.mat',k);
         
         % Assign .mat file with onsets/names/pmods in to path
         conditionPath = [outputDir fs conditionFile];
-        multiregPath = [epiDir fs mCorrFile];
+        multiregPath = [outputDir fs multiFile];
         
         % get epi files for this session
         epiDir = [dir_base fs name_subj{n} fs dir_epi fs sess_prfx num2str(scanK)];

@@ -20,17 +20,16 @@ function fil_fieldmap_preprocess(which_subjects)
 % Steve Fleming & Dan Bang, FIL, 07/06/2016
 
 %% DETAILS
-n_fun = 6; % 5 main task scans + 1 motion localiser scan
+n_fun = 5; % 4 main task scans + 1 motion localiser scan
 sbj_v = which_subjects; % which subjects
 
 %% Directory paths and targets
 fs          = filesep;
-dbpath      = pathMacbook(0);
 dir_funct   = 'Functional';
 dir_block   = 'sess';
 dir_fm      = 'Fieldmaps';
-dir_root    = [dbpath,fs,'Ego',fs,'Matlab',fs,'ucl',fs,'sensory_vs_decision',fs,'brain',fs,'data'];
-dir_spm     = [dbpath,fs,'Ego',fs,'Matlab',fs,'spm12'];
+dir_root = '/Users/sfleming/Documents/Data/QS/Raw';
+dir_spm  = '/Users/sfleming/Dropbox/Utils/spm12/';
 
 %% Add SPM directory
 addpath(dir_spm);
@@ -40,7 +39,7 @@ addpath(dir_spm);
 te1             = 10.0;     % short echo time 
 te2             = 12.46;    % long echo time
 epifm           = 0;        % epi-based fieldmap (1/0)
-tert            = 37;       % total echo (EPI) readout time -- see EPI sequence
+tert            = 36;       % total echo (EPI) readout time -- see EPI sequence
 kdir            = -1;       % blip direction (+1/-1) -- see EPI sequence
 mask            = 1;        % (optional flag, default=1) Do brain masking or not (only if non-epi fieldmap)
 match           = 1;        % (optional flag, default=1) Match fieldmap to epi or not

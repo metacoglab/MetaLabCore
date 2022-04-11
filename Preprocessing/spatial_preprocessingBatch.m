@@ -53,7 +53,7 @@ segment = 1;
 normalise = 1;
 old_normalise = 0;
 smoothing = 1;
-FWHM = 8;
+FWHM = 5;
 resolEPI = [2 2 2];
 
 % parse inputs
@@ -367,7 +367,7 @@ if normalise
         
 
         disp(['RUNNING normalisation (write) job for subject ' name_subj{s0}])
-        v
+        spm_jobman('run','normwriteEPI.mat');
         clear jobs
         % *********************************************************************
     end

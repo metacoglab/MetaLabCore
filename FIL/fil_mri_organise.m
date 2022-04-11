@@ -15,18 +15,18 @@ cwd = pwd;
 load('subject_details.mat');
 
 %% Numbers 
-n_fun = 5; % n functional run folders (main task)
-n_dum = 4; % n dummys
+n_fun = 4; % n functional run folders (main task)
+n_dum = 5; % n dummys
 
 %% Directory paths and targets
 fs          = filesep;
-dbpath      = getDropbox(0);
+% dbpath      = getDropbox(0);
 dir_loc     = 'Localiser';
 dir_funct   = 'Functional';
 dir_block   = 'sess';
 dir_struct  = 'Structural';
 dir_fm      = 'Fieldmaps';
-dir_root    = [dbpath,fs,'ego',fs,'matlab',fs,'ucl',fs,'sensory_vs_decision',fs,'brain',fs,'data'];
+dir_root = '/Users/sfleming/Documents/Data/QS/Raw';
 
 %% Loop through scans
 for i_s = which_subjects;
