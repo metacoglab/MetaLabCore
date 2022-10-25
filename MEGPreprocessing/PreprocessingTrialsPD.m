@@ -35,17 +35,22 @@ for d = 1:nDataSets
     fprintf('\t GETTING THE DATA FOR BLOCK %d OUT OF %d \n',d,nDataSets)
     cfg                         = cfgS;
     cfg.dataset                 = dataSets{d};   
-    cfg.trialfun                = 'trialfun_photodiadBOB';
-    cfg.trialdef.eventtype      = 'UADC004';
+    cfg.trialdef.eventtype      = 'UPPT001';
     cfg.trialdef.eventvalue     = cfg0.eventvalue; % stimulus 1
-    cfg.trialdef.prestim        = cfg0.prestim;
-    cfg.trialdef.poststim       = cfg0.poststim;
-    cfg.trialdef.nTrls          = 96; % number of trials per block
+    cfg.trialdef.pdiodetype     = 'UADC004';
+    cfg.trialdef.prestim        = cfg0.prestim+0.1; %we add additional time in case PD alginment requires us to move trial's 0 point
+    cfg.trialdef.poststim       = cfg0.poststim+0.1;
+    cfg.trialdef.nTrls          = nTrls; % number of trials per block
+    cfg.plot                   = cfg0.plot;
     cfg                         = ft_definetrial(cfg);
     
     % get it
-    dataS{d}                    = ft_preprocessing(cfg);    
+    data                  = ft_preprocessing(cfg);    
     
+    %align with photodiode
+    cfg.prestim = cfg0.prestim;
+    cfg.poststim = cfg0.poststim;
+    dataS{d} = AlignPDiode(cfg,data); %This is where we align trigger with photodiode
     
 end
 
